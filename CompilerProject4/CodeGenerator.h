@@ -63,7 +63,15 @@ public:
         string num2 = instruction.num2;
         string res = instruction.res;
         
+        bool is_label = false;
+        
         switch (Op) {
+            case LABEL:{
+                s << "\n" << res << ":" ;
+                is_label = true;
+                break;
+            }
+            
             case LOAD_IMMEDIATE:{
                 int reg = get_register(res);
                 s << "li $t" << reg << " " << num1;
@@ -77,6 +85,26 @@ public:
                 s << "lw $t" << reg << " " << offset << "($sp)";
                 break;
             }
+            
+            case __MUL__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                
+                s << "mul $t" << reg1 << " " << "$t" << reg2 << "\n";
+                int reg3 = get_register(res);
+                s << "mflo " << "$t" << reg3;
+                break;
+            }
+            
+            case __DIV__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                
+                s << "div $t" << reg1 << " " << "$t" << reg2 << "\n";
+                int reg3 = get_register(res);
+                s << "mflo " << "$t" << reg3;
+                break;
+            }
                 
             case __ADD__:{
                 int reg2 = release_reg(num2);
@@ -84,15 +112,23 @@ public:
                 
                 int reg3 = get_register(res);
                 
-                
                 s << "add $t" << reg3 << " " << "$t" << reg1 << " " << "$t" << reg2;
+                break;
+            }
+                
+            case __SUB__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                
+                int reg3 = get_register(res);
+                
+                s << "sub $t" << reg3 << " " << "$t" << reg1 << " " << "$t" << reg2;
                 break;
             }
             
             case ASSIGN:{
                 int offset = get_offset(res);
                 if(num1=="0"){
-//                    int reg = release_reg(num1);
                     s << "sw $zero" << " " << offset << "($sp)";
                 }
                 else{
@@ -103,11 +139,6 @@ public:
                 break;
             }
                 
-            case LABEL:{
-                s << res << ":" ;
-                break;
-            }
-            
             case GOTO:{
                 s << "j " << res;
                 break;
@@ -117,8 +148,43 @@ public:
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
                 s << "beq $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                break;
             }
                 
+            case __GREATER__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                s << "bgt $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                break;
+            }
+                
+            case __LESS__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                s << "blt $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                break;
+            }
+                
+            case __GREATER_or_EQUAL__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                s << "bge $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                break;
+            }
+                
+            case __LESS_or_EQUAL__:{
+                int reg2 = release_reg(num2);
+                int reg1 = release_reg(num1);
+                s << "ble $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                break;
+            }
+                
+            case __RETURN__:{
+                int reg = release_reg(res);
+                s << "move $v0 " << "$t" << reg << "\n";
+                s << "jr $ra";
+                break;
+            }
                 
             default:
                 break;

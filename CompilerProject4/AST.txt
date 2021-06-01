@@ -17,8 +17,12 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                                 Descs---Desc----Asig_E--Id------a       
                                                                         =       
                                                                         Expr----Factor--Decimal_Number9900    
-                                                                                +       
-                                                                                Factor--Id------i       
+                                                                                -       
+                                                                                Expr----Expr----Factor--Id------i       
+                                                                                                *       
+                                                                                                Factor--Decimal_Number2       
+                                                                                        /       
+                                                                                        Factor--Decimal_Number3       
                                         ;       
                                 Stmt----Decl----Type----int     
                                                 Descs---Desc----Id------x       
@@ -26,7 +30,7 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                 Stmt----IF_BlockIF------if      
                                                         (       
                                                         Expr----Factor--Id------a       
-                                                                ==      
+                                                                <=      
                                                                 Factor--Decimal_Number998     
                                                         )       
                                                         Block---{       
@@ -49,5 +53,24 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                                 Descs---Desc----Asig_E--Id------b       
                                                                         =       
                                                                         Factor--Decimal_Number12      
+                                        ;       
+                                Stmt----WHILE---while   
+                                                (       
+                                                Expr----Factor--Id------b       
+                                                        <       
+                                                        Factor--Decimal_Number20      
+                                                )       
+                                                Block---{       
+                                                        Stmts---Stmt----Asig_E--Id------b       
+                                                                                =       
+                                                                                Expr----Factor--Id------b       
+                                                                                        +       
+                                                                                        Factor--Decimal_Number1       
+                                                                        ;       
+                                                        }       
+                                Stmt----RETURN--return  
+                                                Expr----Factor--Id------i       
+                                                        +       
+                                                        Factor--Decimal_Number1       
                                         ;       
                         }       

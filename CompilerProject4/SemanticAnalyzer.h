@@ -81,6 +81,31 @@ public:
         proc_Block(MAIN.sons[4]);
     }
     
+    void proc_RETURN(const Node& RETURN){
+        string res = get_Unit(RETURN.sons[1]);
+        instructions.add_instruction(__RETURN__, NONE, NONE, res);
+    }
+    
+    void proc_WHILE(const Node& WHILE){
+        string label_while = Instruction::seriablize("WHILE", WHILE.id);
+        string label_while_block = Instruction::seriablize("WHILE_BLOCK", WHILE.id);
+        string label_while_exit = Instruction::seriablize("EXIT", WHILE.id);
+        
+        instructions.add_instruction(LABEL, NONE, NONE, label_while);
+        get_Unit(WHILE.sons[2]);
+        instructions.add_label(label_while_block);
+        instructions.add_instruction(GOTO, NONE, NONE, label_while_exit);
+        
+        instructions.add_instruction(LABEL, NONE, NONE, label_while_block);
+        
+        proc_Block(WHILE.sons[4]);
+        
+        instructions.add_instruction(GOTO, NONE, NONE, label_while);
+        
+        instructions.add_instruction(LABEL, NONE, NONE, label_while_exit);
+        
+    }
+    
     void proc_Stmt(const Node& Stmt){
         string stmt = Stmt.Component;
         int symbol = SYMBOL_MAP[Stmt.Component];
@@ -96,7 +121,12 @@ public:
             case __IF_Block__:
                 proc_IF_Block(Stmt);
                 break;
-                
+            case __WHILE__:
+                proc_WHILE(Stmt);
+                break;
+            case __RETURN__:
+                proc_RETURN(Stmt);
+                break;
             default:
                 break;
         }
@@ -111,9 +141,9 @@ public:
                 case __IF__:
                     proc_IF(i);
                     break;
-                case __ELSE_IF__:
-                    proc_ELSE_IF(i);
-                    break;
+//                case __ELSE_IF__:
+//                    proc_ELSE_IF(i);
+//                    break;
                 case __ELSE__:
                     proc_ELSE(i);
                     break;
@@ -131,19 +161,24 @@ public:
     
     void proc_IF(const Node& IF){
         get_Unit(IF.sons[2]);
-        string label = Instruction::seriablize("IF", IF.id);
+        string label_if = Instruction::seriablize("IF", IF.id);
         label_if_exit = Instruction::seriablize("EXIT", IF.id);
         
-        instructions.add_label(label);
+        instructions.add_label(label_if);
         if_pos = instructions.get_pos();
-        instructions.add_instruction(LABEL, NONE, NONE, label);
+        instructions.add_instruction(LABEL, NONE, NONE, label_if);
         proc_Block(IF.sons[4]);
         instructions.add_instruction(GOTO, NONE, NONE, label_if_exit);
     }
     
-    void proc_ELSE_IF(const Node& ELSE_IF){
-        proc_Block(ELSE_IF.sons[4]);
-    }
+//    void proc_ELSE_IF(const Node& ELSE_IF){
+//        string label_else_if = Instruction::seriablize("ELSE_IF", ELSE_IF.id);
+//
+//        instructions.add_instruction(GOTO, NONE, NONE, label_else_if, if_pos);
+//        if_pos += 1;
+//
+//        proc_Block(ELSE_IF.sons[4]);
+//    }
     
     void proc_ELSE(const Node& ELSE){
         string label_else = Instruction::seriablize("ELSE", ELSE.id);
@@ -299,6 +334,7 @@ public:
                 proc_FunDef(H_Stmt);
                 break;
             }
+            
             default:
                 break;
             

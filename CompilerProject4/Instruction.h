@@ -18,11 +18,11 @@ public:
         Op(Op), num1(num1), num2(num2), res(res){}
     
     static string seriablize(string variable_name, int scope){
-        return variable_name + "-" + to_string(scope);
+        return variable_name + "_" + to_string(scope);
     }
     
     static pair<string, int> unseriablize(string variable_name_scope){
-        int p = variable_name_scope.find("-");
+        int p = variable_name_scope.find("_");
         string variable_name = variable_name_scope.substr(0, p);
         int scope = stoi(variable_name_scope.substr(p+1));
         return make_pair(variable_name, scope);

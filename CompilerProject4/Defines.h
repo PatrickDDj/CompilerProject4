@@ -20,6 +20,8 @@
 #define _BOOL_ "bool"
 #define _VOID_ "void"
 
+#define SPACE "    "
+
 #define __INT__ 1
 #define __FLOAT__ 2
 #define __BOOL__ 3
@@ -47,6 +49,7 @@
 #define _ADD_ "+"
 #define _SUB_ "-"
 #define _MUL_ "*"
+#define _DIV_ "/"
 #define _EQUAL_ "=="
 #define _GREATER_ ">"
 #define _LESS_ "<"
@@ -56,6 +59,8 @@
 #define _MINUS_MINUS_ "--"
 #define _Para_Def_ "ParaDef"
 #define _Fun_Def_ "FunDef"
+#define _RETURN_ "RETURN"
+#define _WHILE_ "WHILE"
 
 
 #define __HEADER__ 11
@@ -83,6 +88,9 @@
 #define __MINUS_MINUS__ 33
 #define __Para_Def__ 34
 #define __Fun_Def__ 35
+#define __DIV__ 36
+#define __RETURN__ 37
+#define __WHILE__ 38
 
 
 #define NONE "NONE"
@@ -139,6 +147,9 @@ map<string, int> SYMBOL_MAP = {
     {_MINUS_MINUS_, __MINUS_MINUS__},
     {_Fun_Def_, __Fun_Def__},
     {_Para_Def_, __Para_Def__},
+    {_DIV_, __DIV__},
+    {_RETURN_, __RETURN__},
+    {_WHILE_, __WHILE__},
 };
 
 const vector<string> KEY_WORDS = {

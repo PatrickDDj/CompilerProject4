@@ -4,11 +4,11 @@ int i;
 
 
 int main(){
-    int a = 9900+i;
+    int a = 9900-i*2/3;
     int x;
     
     // step into another scope
-    if(a == 998){
+    if(a <= 998){
         int b = a;
     }
     else{
@@ -17,6 +17,11 @@ int main(){
     
     int b = 12;
     
+    while(b<20){
+        b = b + 1;
+    }
+    
+    return i+1;
 }
 
 
