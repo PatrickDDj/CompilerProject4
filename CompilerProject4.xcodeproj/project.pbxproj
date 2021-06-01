@@ -23,8 +23,20 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D6DFD91A2665D4EF00A46946 /* CodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeGenerator.h; sourceTree = "<group>"; };
 		D6F2531A26647DAF005A8DDA /* CompilerProject4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CompilerProject4; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6F2531D26647DAF005A8DDA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		D6F2532526647DE7005A8DDA /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		D6F2532626647DE7005A8DDA /* LexicalAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LexicalAnalyzer.h; sourceTree = "<group>"; };
+		D6F2532726647DE7005A8DDA /* AST.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AST.txt; sourceTree = "<group>"; };
+		D6F2532826647DE7005A8DDA /* ScopeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScopeManager.h; sourceTree = "<group>"; };
+		D6F2532926647DE7005A8DDA /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		D6F2532A26647DE7005A8DDA /* Variable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Variable.h; sourceTree = "<group>"; };
+		D6F2532B26647DE7005A8DDA /* Function.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Function.h; sourceTree = "<group>"; };
+		D6F2532C26647DE7005A8DDA /* p2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = p2.txt; sourceTree = "<group>"; };
+		D6F2532D26647DE7005A8DDA /* GrammarAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrammarAnalyzer.h; sourceTree = "<group>"; };
+		D6F2532E26647DE7005A8DDA /* SemanticAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemanticAnalyzer.h; sourceTree = "<group>"; };
+		D6F253302664D674005A8DDA /* Instruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Instruction.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +69,19 @@
 		D6F2531C26647DAF005A8DDA /* CompilerProject4 */ = {
 			isa = PBXGroup;
 			children = (
+				D6F2532726647DE7005A8DDA /* AST.txt */,
+				D6F2532926647DE7005A8DDA /* Defines.h */,
+				D6F2532B26647DE7005A8DDA /* Function.h */,
+				D6F2532D26647DE7005A8DDA /* GrammarAnalyzer.h */,
+				D6F2532626647DE7005A8DDA /* LexicalAnalyzer.h */,
+				D6F2532526647DE7005A8DDA /* Node.h */,
+				D6F2532C26647DE7005A8DDA /* p2.txt */,
+				D6F2532826647DE7005A8DDA /* ScopeManager.h */,
+				D6F2532E26647DE7005A8DDA /* SemanticAnalyzer.h */,
+				D6F2532A26647DE7005A8DDA /* Variable.h */,
 				D6F2531D26647DAF005A8DDA /* main.cpp */,
+				D6F253302664D674005A8DDA /* Instruction.h */,
+				D6DFD91A2665D4EF00A46946 /* CodeGenerator.h */,
 			);
 			path = CompilerProject4;
 			sourceTree = "<group>";

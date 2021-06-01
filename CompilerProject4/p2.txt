@@ -1,0 +1,22 @@
+int a = 11+99;
+int i;
+
+
+
+int main(){
+    int a = 9900+i;
+    int x;
+    
+    // step into another scope
+    if(a == 998){
+        int b = a;
+    }
+    else{
+         a = a + 1;
+    }
+    
+    int b = 12;
+    
+}
+
+
