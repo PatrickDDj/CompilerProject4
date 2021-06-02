@@ -77,7 +77,7 @@ public:
     }
     
     void proc_MAIN(const Node& MAIN){
-        instructions.add_instruction(LABEL, NONE, NONE, "main");
+        instructions.add_instruction(LABEL, NONE, NONE, "main_block");
         proc_Block(MAIN.sons[4]);
     }
     
@@ -216,45 +216,14 @@ public:
         instructions.add_instruction(GOTO, NONE, NONE, label_exit);
     }
     
-//    int if_pos;
-//    string label_if_exit;
-//
-//    void proc_IF(const Node& IF){
-//        get_Unit(IF.sons[2]);
-//        string label_if = Instruction::seriablize("IF", IF.id);
-//        label_if_exit = Instruction::seriablize("EXIT", IF.id);
-//
-//        instructions.add_label(label_if);
-//        if_pos = instructions.get_pos();
-//        instructions.add_instruction(LABEL, NONE, NONE, label_if);
-//        proc_Block(IF.sons[4]);
-//        instructions.add_instruction(GOTO, NONE, NONE, label_if_exit);
-//    }
-//
-////    void proc_ELSE_IF(const Node& ELSE_IF){
-////        string label_else_if = Instruction::seriablize("ELSE_IF", ELSE_IF.id);
-////
-////        instructions.add_instruction(GOTO, NONE, NONE, label_else_if, if_pos);
-////        if_pos += 1;
-////
-////        proc_Block(ELSE_IF.sons[4]);
-////    }
-//
-//    void proc_ELSE(const Node& ELSE){
-//        string label_else = Instruction::seriablize("ELSE", ELSE.id);
-//
-//        instructions.add_instruction(GOTO, NONE, NONE, label_else, if_pos);
-//
-//        instructions.add_instruction(LABEL, NONE, NONE, label_else);
-//        proc_Block(ELSE.sons[1]);
-//        instructions.add_instruction(LABEL, NONE, NONE, label_if_exit);
-//    }
-    
     void proc_HEADER(const Node& HEADER){
+        instructions.add_instruction(LABEL, NONE, NONE, "main");
         const Node& H_Stmts = HEADER.sons[0];
         for(auto H_Stmt : H_Stmts.sons){
             proc_H_Stmt(H_Stmt.sons[0]);
         }
+        instructions.add_instruction(GOTO_LINK, NONE, NONE, "main_block");
+        instructions.add_instruction(EXIT, NONE, NONE, NONE);
     }
     
     void proc_Asig_E(const Node& Asig_E){

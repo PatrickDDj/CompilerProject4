@@ -1,10 +1,9 @@
 int a = 11+99;
-int i;
-
-
+int i=1111;
 
 int main(){
-    int a = 9900-i*2/3;
+    
+    //int a = 9900-i*2/3;
     int x;
     
     // step into another scope
@@ -28,11 +27,11 @@ int main(){
     
     int b = 12;
     
-    while(b<20){
+    while(b<13){
         b = b + 1;
     }
     
-    return i+1;
+    return 7+i;
 }
 
 

@@ -6,7 +6,9 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                                                         Factor--Decimal_Number99      
                                 ;       
                         H_Stmt--Decl----Type----int     
-                                        Descs---Desc----Id------i       
+                                        Descs---Desc----Asig_E--Id------i       
+                                                                =       
+                                                                Factor--Decimal_Number1111    
                                 ;       
         MAIN----int     
                 main    
@@ -14,17 +16,6 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                 )       
                 Block---{       
                         Stmts---Stmt----Decl----Type----int     
-                                                Descs---Desc----Asig_E--Id------a       
-                                                                        =       
-                                                                        Expr----Factor--Decimal_Number9900    
-                                                                                -       
-                                                                                Expr----Expr----Factor--Id------i       
-                                                                                                *       
-                                                                                                Factor--Decimal_Number2       
-                                                                                        /       
-                                                                                        Factor--Decimal_Number3       
-                                        ;       
-                                Stmt----Decl----Type----int     
                                                 Descs---Desc----Id------x       
                                         ;       
                                 Stmt----IF_BlockIF------if      
@@ -98,7 +89,7 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                                 (       
                                                 Expr----Factor--Id------b       
                                                         <       
-                                                        Factor--Decimal_Number20      
+                                                        Factor--Decimal_Number13      
                                                 )       
                                                 Block---{       
                                                         Stmts---Stmt----Asig_E--Id------b       
@@ -109,8 +100,8 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                                                         ;       
                                                         }       
                                 Stmt----RETURN--return  
-                                                Expr----Factor--Id------i       
+                                                Expr----Factor--Decimal_Number7       
                                                         +       
-                                                        Factor--Decimal_Number1       
+                                                        Factor--Id------i       
                                         ;       
                         }       

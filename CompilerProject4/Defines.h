@@ -99,6 +99,8 @@
 #define ASSIGN 3
 #define LABEL 4
 #define GOTO 5
+#define GOTO_LINK 6
+#define EXIT 7
 
 using namespace std;
 

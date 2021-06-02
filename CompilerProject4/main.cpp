@@ -23,5 +23,6 @@ int main(int argc, const char * argv[]) {
     
     CodeGenerator codegen(se.get_instructions(), se.get_variables());
     codegen.translate();
+    codegen.print_mips_instructions();
     
 }

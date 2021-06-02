@@ -44,11 +44,7 @@ public:
     void add_instruction(int Op, string num1, string num2, string res, int pos){
         instructions.insert(instructions.begin()+pos ,Instruction(Op, num1, num2, res));
     }
-    
-//    void add_instructions(const vector<Instruction> _instructions){
-//        instructions.insert(instructions.end(), _instructions.begin(), _instructions.end());
-//    }
-    
+
     void add_label(string label){
         instructions.back().res = label;
     }

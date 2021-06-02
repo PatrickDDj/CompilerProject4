@@ -46,9 +46,15 @@ public:
     }
     
     void translate(){
+        mips_instructions.push_back(".data\nprompt: .asciiz \"enter an integer : \"\nprint: .asciiz \"result : \"\nend: .asciiz \"\\n\"\n\n.text");
         for(auto instruction : instructions){
             translate(instruction);
         }
+        mips_instructions.push_back("\nread:\nli $v0 4\nla $a0 prompt\nsyscall\nli $v0 5\nsyscall\njr $ra");
+        mips_instructions.push_back("\nwrite:\nli $v0 4\nla $a0 print\nsyscall\nli $v0 1\nsyscall\nli $v0 4\nla $a0 end\nsyscall\njr $ra");
+    }
+    
+    void print_mips_instructions(){
         for(auto mips_instruction : mips_instructions){
             cout << mips_instruction << endl;
         }
@@ -68,7 +74,9 @@ public:
         switch (Op) {
             case LABEL:{
                 s << "\n" << res << ":" ;
-                is_label = true;
+                if(res == "main_block"){
+                    s << "\nmove $s0 $ra";
+                }
                 break;
             }
             
@@ -90,7 +98,7 @@ public:
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
                 
-                s << "mul $t" << reg1 << " " << "$t" << reg2 << "\n";
+                s << "mult $t" << reg1 << " " << "$t" << reg2 << "\n";
                 int reg3 = get_register(res);
                 s << "mflo " << "$t" << reg3;
                 break;
@@ -144,6 +152,16 @@ public:
                 break;
             }
                 
+            case GOTO_LINK:{
+                s << "jal " << res;
+                break;
+            }
+                
+            case EXIT:{
+                s << "li $v0 10\nsyscall";
+                break;
+            }
+                
             case __EQUAL__:{
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
@@ -182,6 +200,7 @@ public:
             case __RETURN__:{
                 int reg = release_reg(res);
                 s << "move $v0 " << "$t" << reg << "\n";
+                s << "move $ra $s0\n";
                 s << "jr $ra";
                 break;
             }
