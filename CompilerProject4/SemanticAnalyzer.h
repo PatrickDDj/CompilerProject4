@@ -119,7 +119,7 @@ public:
                 proc_Decl(Stmt);
                 break;
             case __IF_Block__:
-                proc_IF_Block(Stmt);
+                proc_Condition_Block(Stmt);
                 break;
             case __WHILE__:
                 proc_WHILE(Stmt);
@@ -132,63 +132,123 @@ public:
         }
     }
     
-    void proc_IF_Block(const Node& IF_Block){
-        for(auto i : IF_Block.sons){
+    void proc_Condition_Block(const Node& Condition_block){
+        for(auto i : Condition_block.sons){
             int symbol = SYMBOL_MAP[i.Component];
-            
-            
+    
             switch (symbol) {
                 case __IF__:
-                    proc_IF(i);
+                    proc_IF_HEADER(i);
                     break;
-//                case __ELSE_IF__:
-//                    proc_ELSE_IF(i);
-//                    break;
+                case __ELSE_IF__:
+                    proc_ELSE_IF_HEADER(i);
+                    break;
                 case __ELSE__:
-                    proc_ELSE(i);
+                    proc_ELSE_HEADER(i);
                     break;
                     
                 default:
                     break;
             }
-            
-            
         }
+        
+        string label_exit = Instruction::seriablize("EXIT", Condition_block.id);
+        instructions.add_instruction(GOTO, NONE, NONE, label_exit);
+        
+        for(auto i : Condition_block.sons){
+            int symbol = SYMBOL_MAP[i.Component];
+    
+            switch (symbol) {
+                case __IF__:
+                    proc_IF_BODY(i, label_exit);
+                    break;
+                case __ELSE_IF__:
+                    proc_ELSE_IF_BODY(i, label_exit);
+                    break;
+                case __ELSE__:
+                    proc_ELSE_BODY(i, label_exit);
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
+        instructions.add_instruction(LABEL, NONE, NONE, label_exit);
     }
     
-    int if_pos;
-    string label_if_exit;
-    
-    void proc_IF(const Node& IF){
-        get_Unit(IF.sons[2]);
+    void proc_IF_HEADER(const Node& IF){
         string label_if = Instruction::seriablize("IF", IF.id);
-        label_if_exit = Instruction::seriablize("EXIT", IF.id);
-        
+        get_Unit(IF.sons[2]);
         instructions.add_label(label_if);
-        if_pos = instructions.get_pos();
+    }
+    
+    void proc_ELSE_IF_HEADER(const Node& ELSE_IF){
+        string label_else_if = Instruction::seriablize("ELSE_IF", ELSE_IF.id);
+        get_Unit(ELSE_IF.sons[2]);
+        instructions.add_label(label_else_if);
+    }
+    
+    void proc_ELSE_HEADER(const Node& ELSE){
+        string label_else = Instruction::seriablize("ELSE", ELSE.id);
+        instructions.add_instruction(GOTO, NONE, NONE, label_else);
+    }
+    
+    
+    void proc_IF_BODY(const Node& IF, string label_exit){
+        string label_if = Instruction::seriablize("IF", IF.id);
         instructions.add_instruction(LABEL, NONE, NONE, label_if);
         proc_Block(IF.sons[4]);
-        instructions.add_instruction(GOTO, NONE, NONE, label_if_exit);
+        instructions.add_instruction(GOTO, NONE, NONE, label_exit);
     }
     
-//    void proc_ELSE_IF(const Node& ELSE_IF){
-//        string label_else_if = Instruction::seriablize("ELSE_IF", ELSE_IF.id);
-//
-//        instructions.add_instruction(GOTO, NONE, NONE, label_else_if, if_pos);
-//        if_pos += 1;
-//
-//        proc_Block(ELSE_IF.sons[4]);
-//    }
+    void proc_ELSE_IF_BODY(const Node& ELSE_IF, string label_exit){
+        string label_else_if = Instruction::seriablize("ELSE_IF", ELSE_IF.id);
+        instructions.add_instruction(LABEL, NONE, NONE, label_else_if);
+        proc_Block(ELSE_IF.sons[4]);
+        instructions.add_instruction(GOTO, NONE, NONE, label_exit);
+    }
     
-    void proc_ELSE(const Node& ELSE){
+    void proc_ELSE_BODY(const Node& ELSE, string label_exit){
         string label_else = Instruction::seriablize("ELSE", ELSE.id);
-
-        instructions.add_instruction(GOTO, NONE, NONE, label_else, if_pos);
-        
         instructions.add_instruction(LABEL, NONE, NONE, label_else);
-        proc_Block(ELSE.sons[1]);
-        instructions.add_instruction(LABEL, NONE, NONE, label_if_exit);
+        proc_Block(ELSE.sons[2]);
+        instructions.add_instruction(GOTO, NONE, NONE, label_exit);
     }
+    
+//    int if_pos;
+//    string label_if_exit;
+//
+//    void proc_IF(const Node& IF){
+//        get_Unit(IF.sons[2]);
+//        string label_if = Instruction::seriablize("IF", IF.id);
+//        label_if_exit = Instruction::seriablize("EXIT", IF.id);
+//
+//        instructions.add_label(label_if);
+//        if_pos = instructions.get_pos();
+//        instructions.add_instruction(LABEL, NONE, NONE, label_if);
+//        proc_Block(IF.sons[4]);
+//        instructions.add_instruction(GOTO, NONE, NONE, label_if_exit);
+//    }
+//
+////    void proc_ELSE_IF(const Node& ELSE_IF){
+////        string label_else_if = Instruction::seriablize("ELSE_IF", ELSE_IF.id);
+////
+////        instructions.add_instruction(GOTO, NONE, NONE, label_else_if, if_pos);
+////        if_pos += 1;
+////
+////        proc_Block(ELSE_IF.sons[4]);
+////    }
+//
+//    void proc_ELSE(const Node& ELSE){
+//        string label_else = Instruction::seriablize("ELSE", ELSE.id);
+//
+//        instructions.add_instruction(GOTO, NONE, NONE, label_else, if_pos);
+//
+//        instructions.add_instruction(LABEL, NONE, NONE, label_else);
+//        proc_Block(ELSE.sons[1]);
+//        instructions.add_instruction(LABEL, NONE, NONE, label_if_exit);
+//    }
     
     void proc_HEADER(const Node& HEADER){
         const Node& H_Stmts = HEADER.sons[0];

@@ -14,8 +14,8 @@
             filePath = "CompilerProject4/SemanticAnalyzer.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
             landmarkName = "proc_Decl(Decl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,9 +46,9 @@
             filePath = "CompilerProject4/SemanticAnalyzer.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "proc_IF_Block(IF_Block)"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "proc_Condition_Block(Condition_block)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,8 +110,8 @@
             filePath = "CompilerProject4/SemanticAnalyzer.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "proc_Asig_E(Asig_E)"
             landmarkType = "7">
          </BreakpointContent>
