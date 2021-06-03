@@ -23,6 +23,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D6561F6A266878730038A78D /* mips.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mips.txt; sourceTree = "<group>"; };
+		D6561F6C2668793D0038A78D /* intermediate_code.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = intermediate_code.txt; sourceTree = "<group>"; };
 		D6ADBC6D2666005300AF340F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D6DFD91A2665D4EF00A46946 /* CodeGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeGenerator.h; sourceTree = "<group>"; };
 		D6F2531A26647DAF005A8DDA /* CompilerProject4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CompilerProject4; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +73,8 @@
 		D6F2531C26647DAF005A8DDA /* CompilerProject4 */ = {
 			isa = PBXGroup;
 			children = (
+				D6561F6C2668793D0038A78D /* intermediate_code.txt */,
+				D6561F6A266878730038A78D /* mips.txt */,
 				D6F2532726647DE7005A8DDA /* AST.txt */,
 				D6F2532926647DE7005A8DDA /* Defines.h */,
 				D6F2532B26647DE7005A8DDA /* Function.h */,

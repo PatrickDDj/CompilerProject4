@@ -46,18 +46,20 @@ public:
     }
     
     void translate(){
-        mips_instructions.push_back(".data\nprompt: .asciiz \"enter an integer : \"\nprint: .asciiz \"result : \"\nend: .asciiz \"\\n\"\n\n.text");
+        mips_instructions.push_back(".data\nprompt: .asciiz \"enter an integer : \"\nend: .asciiz \"\\n\"\n\n.text\n");
         for(auto instruction : instructions){
             translate(instruction);
         }
-        mips_instructions.push_back("\nread:\nli $v0 4\nla $a0 prompt\nsyscall\nli $v0 5\nsyscall\njr $ra");
-        mips_instructions.push_back("\nwrite:\nli $v0 4\nla $a0 print\nsyscall\nli $v0 1\nsyscall\nli $v0 4\nla $a0 end\nsyscall\njr $ra");
+        mips_instructions.push_back("\nread:\nli $v0 4\nla $a0 prompt\nsyscall\nli $v0 5\nsyscall\njr $ra\n");
+        mips_instructions.push_back("\nwrite:\nli $v0 1\nsyscall\nli $v0 4\nla $a0 end\nsyscall\njr $ra\n");
     }
     
     void print_mips_instructions(){
+        ofstream mips("mips.txt");
         for(auto mips_instruction : mips_instructions){
-            cout << mips_instruction << endl;
+            mips << mips_instruction;
         }
+        mips.close();
     }
     
     void translate(Instruction instruction){
@@ -73,16 +75,16 @@ public:
         
         switch (Op) {
             case LABEL:{
-                s << "\n" << res << ":" ;
+                s << "\n" << res << ":\n" ;
                 if(res == "main_block"){
-                    s << "\nmove $s0 $ra";
+                    s << "\nmove $s0 $ra\n";
                 }
                 break;
             }
             
             case LOAD_IMMEDIATE:{
                 int reg = get_register(res);
-                s << "li $t" << reg << " " << num1;
+                s << "li $t" << reg << " " << num1 << "\n";
                 break;
             }
                 
@@ -90,7 +92,7 @@ public:
                 int reg = get_register(res);
                 int offset = get_offset(num1);
                 
-                s << "lw $t" << reg << " " << offset << "($sp)";
+                s << "lw $t" << reg << " " << offset << "($sp)" << "\n";
                 break;
             }
             
@@ -100,7 +102,7 @@ public:
                 
                 s << "mult $t" << reg1 << " " << "$t" << reg2 << "\n";
                 int reg3 = get_register(res);
-                s << "mflo " << "$t" << reg3;
+                s << "mflo " << "$t" << reg3 << "\n";
                 break;
             }
             
@@ -110,7 +112,7 @@ public:
                 
                 s << "div $t" << reg1 << " " << "$t" << reg2 << "\n";
                 int reg3 = get_register(res);
-                s << "mflo " << "$t" << reg3;
+                s << "mflo " << "$t" << reg3 << "\n";
                 break;
             }
                 
@@ -120,7 +122,7 @@ public:
                 
                 int reg3 = get_register(res);
                 
-                s << "add $t" << reg3 << " " << "$t" << reg1 << " " << "$t" << reg2;
+                s << "add $t" << reg3 << " " << "$t" << reg1 << " " << "$t" << reg2 << "\n";
                 break;
             }
                 
@@ -130,70 +132,70 @@ public:
                 
                 int reg3 = get_register(res);
                 
-                s << "sub $t" << reg3 << " " << "$t" << reg1 << " " << "$t" << reg2;
+                s << "sub $t" << reg3 << " " << "$t" << reg1 << " " << "$t" << reg2 << "\n";
                 break;
             }
             
             case ASSIGN:{
                 int offset = get_offset(res);
                 if(num1=="0"){
-                    s << "sw $zero" << " " << offset << "($sp)";
+                    s << "sw $zero" << " " << offset << "($sp)" << "\n";
                 }
                 else{
                     int reg = release_reg(num1);
-                    s << "sw $t" << reg << " " << offset << "($sp)";
+                    s << "sw $t" << reg << " " << offset << "($sp)" << "\n";
                 }
                 
                 break;
             }
                 
             case GOTO:{
-                s << "j " << res;
+                s << "j " << res << "\n";
                 break;
             }
                 
             case GOTO_LINK:{
-                s << "jal " << res;
+                s << "jal " << res << "\n";
                 break;
             }
                 
             case EXIT:{
-                s << "li $v0 10\nsyscall";
+                s << "li $v0 10\nsyscall" << "\n";
                 break;
             }
                 
             case __EQUAL__:{
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
-                s << "beq $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                s << "beq $t" << reg1 << " " << "$t" << reg2 << " " << res << "\n";
                 break;
             }
                 
             case __GREATER__:{
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
-                s << "bgt $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                s << "bgt $t" << reg1 << " " << "$t" << reg2 << " " << res << "\n";
                 break;
             }
                 
             case __LESS__:{
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
-                s << "blt $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                s << "blt $t" << reg1 << " " << "$t" << reg2 << " " << res << "\n";
                 break;
             }
                 
             case __GREATER_or_EQUAL__:{
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
-                s << "bge $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                s << "bge $t" << reg1 << " " << "$t" << reg2 << " " << res << "\n";
                 break;
             }
                 
             case __LESS_or_EQUAL__:{
                 int reg2 = release_reg(num2);
                 int reg1 = release_reg(num1);
-                s << "ble $t" << reg1 << " " << "$t" << reg2 << " " << res;
+                s << "ble $t" << reg1 << " " << "$t" << reg2 << " " << res << "\n";
                 break;
             }
                 
@@ -201,7 +203,21 @@ public:
                 int reg = release_reg(res);
                 s << "move $v0 " << "$t" << reg << "\n";
                 s << "move $ra $s0\n";
-                s << "jr $ra";
+                s << "jr $ra\n";
+                break;
+            }
+                
+            case READ:{
+                int offset = get_offset(res);
+                s << "jal read\n";
+                s << "sw $v0 " << offset << "($sp)\n";
+                break;
+            }
+            
+            case WRITE:{
+                int reg = release_reg(res);
+                s << "move $a0 $t" << reg << "\n";
+                s << "jal write\n";
                 break;
             }
                 

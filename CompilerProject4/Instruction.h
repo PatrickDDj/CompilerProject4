@@ -54,8 +54,10 @@ public:
     }
     
     void print_instructions(){
+        ofstream inter("intermediate_code.txt");
         for(auto instruction : instructions){
-            printf("( %d, %s, %s, %s)\n", instruction.Op, instruction.num1.c_str(), instruction.num2.c_str(), instruction.res.c_str());
+//            printf("( %d, %s, %s, %s)\n", instruction.Op, instruction.num1.c_str(), instruction.num2.c_str(), instruction.res.c_str());
+            inter << instruction.Op << " " << instruction.num1<< " " << instruction.num2<< " " << instruction.res << endl;
         }
     }
     

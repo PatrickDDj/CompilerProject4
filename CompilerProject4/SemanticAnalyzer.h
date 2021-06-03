@@ -127,8 +127,28 @@ public:
             case __RETURN__:
                 proc_RETURN(Stmt);
                 break;
+            case __FunCall__:
+                proc_FunCall(Stmt);
+                break;
             default:
                 break;
+        }
+    }
+    
+    void proc_FunCall(const Node& Stmt){
+        string function_name = Stmt.sons[0].sons[0].Component;
+        if(function_name == "get"){
+            for(auto Para : Stmt.sons[2].sons){
+                if(Para.Component == "Para"){
+                    string variable_name = Para.sons[0].sons[0].sons[0].Component;
+                    int scope = variables.seek_variable(scopes.get_cur_usable_scopes(), variable_name);
+                    instructions.add_instruction(READ, NONE, NONE, Instruction::seriablize(variable_name, scope));
+                }
+            }
+        }
+        else if(function_name == "put"){
+            string res = get_Unit(Stmt.sons[2].sons[0].sons[0]);
+            instructions.add_instruction(WRITE, NONE, NONE, res);
         }
     }
     

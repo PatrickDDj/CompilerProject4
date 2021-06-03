@@ -61,6 +61,7 @@
 #define _Fun_Def_ "FunDef"
 #define _RETURN_ "RETURN"
 #define _WHILE_ "WHILE"
+#define _FunCall_ "FunCall"
 
 
 #define __HEADER__ 11
@@ -91,6 +92,7 @@
 #define __DIV__ 36
 #define __RETURN__ 37
 #define __WHILE__ 38
+#define __FunCall__ 39
 
 
 #define NONE "NONE"
@@ -101,6 +103,8 @@
 #define GOTO 5
 #define GOTO_LINK 6
 #define EXIT 7
+#define READ 8
+#define WRITE 9
 
 using namespace std;
 
@@ -152,6 +156,7 @@ map<string, int> SYMBOL_MAP = {
     {_DIV_, __DIV__},
     {_RETURN_, __RETURN__},
     {_WHILE_, __WHILE__},
+    {_FunCall_, __FunCall__},
 };
 
 const vector<string> KEY_WORDS = {

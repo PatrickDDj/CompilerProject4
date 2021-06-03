@@ -362,6 +362,15 @@ private:
                 check_add(Stmt, "Assignment Operator");
             }
         }
+//        else if(get_word() == "get"){
+//            Stmt.add_son(proc_GET());
+//            check_add(Stmt, ";");
+//        }
+        
+//        else if(get_word() == "put"){
+//            Stmt.add_son(proc_PUT());
+//            check_add(Stmt, ";");
+//        }
         
         //Decl
         else if(is_Type()){
@@ -409,7 +418,6 @@ private:
         }
         return Stmt;
     }
-
     
     // IF -> if ( Expr ) Block |
     //       if ( Expr ) Block ELSE |

@@ -4,7 +4,8 @@ int i=1111;
 int main(){
     
     //int a = 9900-i*2/3;
-    int x;
+    int x,y;
+    get(x,y);
     
     // step into another scope
     if(a <= 998){
@@ -30,6 +31,7 @@ int main(){
     while(b<13){
         b = b + 1;
     }
+    put(x+y+b);
     
     return 7+i;
 }

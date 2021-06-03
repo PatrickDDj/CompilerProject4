@@ -17,6 +17,15 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                 Block---{       
                         Stmts---Stmt----Decl----Type----int     
                                                 Descs---Desc----Id------x       
+                                                        ,       
+                                                        Desc----Id------y       
+                                        ;       
+                                Stmt----FunCall-FunName-get     
+                                                (       
+                                                Paras---Para----Factor--Id------x       
+                                                        ,       
+                                                        Para----Factor--Id------y       
+                                                )       
                                         ;       
                                 Stmt----IF_BlockIF------if      
                                                         (       
@@ -99,6 +108,15 @@ PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int
                                                                                         Factor--Decimal_Number1       
                                                                         ;       
                                                         }       
+                                Stmt----FunCall-FunName-put     
+                                                (       
+                                                Paras---Para----Expr----Expr----Factor--Id------x       
+                                                                                +       
+                                                                                Factor--Id------y       
+                                                                        +       
+                                                                        Factor--Id------b       
+                                                )       
+                                        ;       
                                 Stmt----RETURN--return  
                                                 Expr----Factor--Decimal_Number7       
                                                         +       
