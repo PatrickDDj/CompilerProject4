@@ -256,3 +256,8 @@ syscall
 jr $ra
 ```
 
+
+
+#### Result
+
+![](result.png)

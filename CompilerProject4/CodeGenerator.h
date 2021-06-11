@@ -17,7 +17,11 @@ public:
     map<int, map<string, Variable> > variables;
     
     vector<string> mips_instructions;
+    
+    // usable registers(store in a stack)
     vector<int> regs = {7,6,5,4,3,2,1,0};
+    
+    // map(variable -> register)
     map<string, int> regs_status;
     
     CodeGenerator(const vector<Instruction> instructions,
