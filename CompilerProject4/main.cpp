@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
     SemanticAnalyzer se(grammar.get_root());
     se.semantic_analysis();
     
-    CodeGenerator codegen(se.get_instructions(), se.get_variables());
+    CodeGenerator codegen(se.get_instructions());
     codegen.translate();
     codegen.print_mips_instructions();
     

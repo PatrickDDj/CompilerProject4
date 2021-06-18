@@ -5,12 +5,6 @@ end: .asciiz "\n"
 .text
 
 main:
-li $t0 11
-li $t1 99
-add $t0 $t0 $t1
-sw $t0 0($sp)
-li $t0 1111
-sw $t0 -4($sp)
 jal main_block
 li $v0 10
 syscall
@@ -18,85 +12,69 @@ syscall
 main_block:
 
 move $s0 $ra
+sw $zero 0($sp)
+sw $zero -4($sp)
 sw $zero -8($sp)
 sw $zero -12($sp)
-jal read
-sw $v0 -8($sp)
-jal read
-sw $v0 -12($sp)
-lw $t0 0($sp)
-li $t1 998
-ble $t0 $t1 IF_77
-lw $t0 0($sp)
-li $t1 10000
-beq $t0 $t1 ELSE_IF_107
-lw $t0 0($sp)
-li $t1 10001
-beq $t0 $t1 ELSE_IF_137
-j ELSE_167
-j EXIT_76
-
-IF_77:
-lw $t0 0($sp)
-sw $t0 -16($sp)
-j EXIT_76
-
-ELSE_IF_107:
-lw $t0 0($sp)
-li $t1 1
-sub $t0 $t0 $t1
+sw $zero -16($sp)
+li $t0 3333
 sw $t0 0($sp)
-j EXIT_76
+li $t0 6666
+sw $t0 -4($sp)
+li $t0 9999
+sw $t0 -8($sp)
+li $t0 1
+sw $t0 -16($sp)
 
-ELSE_IF_137:
+WHILE_74:
+lw $t0 -16($sp)
+li $t1 0
+bgt $t0 $t1 WHILE_BLOCK_74
+j EXIT_74
+
+WHILE_BLOCK_74:
+lw $t0 -16($sp)
+li $t1 1
+beq $t0 $t1 IF_91
+j EXIT_90
+
+IF_91:
 lw $t0 0($sp)
+sw $t0 -12($sp)
+j EXIT_90
+
+EXIT_90:
+lw $t0 -16($sp)
 li $t1 2
-sub $t0 $t0 $t1
-sw $t0 0($sp)
-j EXIT_76
+beq $t0 $t1 IF_118
+j EXIT_117
 
-ELSE_167:
-j EXIT_76
+IF_118:
+lw $t0 -4($sp)
+sw $t0 -12($sp)
+j EXIT_117
 
-EXIT_76:
-lw $t0 0($sp)
-li $t1 100
-beq $t0 $t1 IF_189
-j EXIT_188
-
-IF_189:
-li $t0 200
-sw $t0 0($sp)
-j EXIT_188
-
-EXIT_188:
-li $t0 12
-sw $t0 -16($sp)
-
-WHILE_229:
+EXIT_117:
 lw $t0 -16($sp)
-li $t1 13
-blt $t0 $t1 WHILE_BLOCK_229
-j EXIT_229
+li $t1 3
+beq $t0 $t1 IF_145
+j EXIT_144
 
-WHILE_BLOCK_229:
-lw $t0 -16($sp)
-li $t1 1
-add $t0 $t0 $t1
-sw $t0 -16($sp)
-j WHILE_229
-
-EXIT_229:
+IF_145:
 lw $t0 -8($sp)
-lw $t1 -12($sp)
-add $t0 $t0 $t1
-lw $t1 -16($sp)
-add $t0 $t0 $t1
+sw $t0 -12($sp)
+j EXIT_144
+
+EXIT_144:
+lw $t0 -12($sp)
 move $a0 $t0
 jal write
-li $t0 7
-lw $t1 -4($sp)
-add $t0 $t0 $t1
+jal read
+sw $v0 -16($sp)
+j WHILE_74
+
+EXIT_74:
+li $t0 0
 move $v0 $t0
 move $ra $s0
 jr $ra

@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "47071366-E777-4C24-A542-6BDE25BFDE77"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CompilerProject4/SemanticAnalyzer.h"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
-            landmarkName = "proc_Decl(Decl)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5A4FB823-9B4E-4CA2-9368-38BAD03C14D5"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,9 +30,9 @@
             filePath = "CompilerProject4/SemanticAnalyzer.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "proc_Condition_Block(Condition_block)"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "proc_IF_Block(IF_block)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,8 +94,8 @@
             filePath = "CompilerProject4/SemanticAnalyzer.h"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "proc_Asig_E(Asig_E)"
             landmarkType = "7">
          </BreakpointContent>

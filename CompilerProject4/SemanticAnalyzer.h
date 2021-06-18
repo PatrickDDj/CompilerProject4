@@ -119,7 +119,7 @@ public:
                 proc_Decl(Stmt);
                 break;
             case __IF_Block__:
-                proc_Condition_Block(Stmt);
+                proc_IF_Block(Stmt);
                 break;
             case __WHILE__:
                 proc_WHILE(Stmt);
@@ -142,7 +142,8 @@ public:
                 if(Para.Component == "Para"){
                     string variable_name = Para.sons[0].sons[0].sons[0].Component;
                     int scope = variables.seek_variable(scopes.get_cur_usable_scopes(), variable_name);
-                    instructions.add_instruction(READ, NONE, NONE, Instruction::seriablize(variable_name, scope));
+                    int offset = variables.get_variable(scope, variable_name).offset;
+                    instructions.add_instruction(READ, NONE, NONE, to_string(offset));
                 }
             }
         }
@@ -152,8 +153,8 @@ public:
         }
     }
     
-    void proc_Condition_Block(const Node& Condition_block){
-        for(auto i : Condition_block.sons){
+    void proc_IF_Block(const Node& IF_block){
+        for(auto i : IF_block.sons){
             int symbol = SYMBOL_MAP[i.Component];
     
             switch (symbol) {
@@ -172,10 +173,10 @@ public:
             }
         }
         
-        string label_exit = Instruction::seriablize("EXIT", Condition_block.id);
+        string label_exit = Instruction::seriablize("EXIT", IF_block.id);
         instructions.add_instruction(GOTO, NONE, NONE, label_exit);
         
-        for(auto i : Condition_block.sons){
+        for(auto i : IF_block.sons){
             int symbol = SYMBOL_MAP[i.Component];
     
             switch (symbol) {
@@ -255,8 +256,8 @@ public:
         
         if(scope){
             string t = get_Unit(Asig_E.sons[2]);
-            instructions.add_instruction(ASSIGN, t, NONE, Instruction::seriablize(variable_name, scope));
-            
+            int offset = variables.get_variable(scope, variable_name).offset;
+            instructions.add_instruction(ASSIGN, t, NONE, to_string(offset));
         }
     }
     
@@ -303,11 +304,10 @@ public:
                 int scope = variables.seek_variable(scopes.get_cur_usable_scopes(), variable_name);
                 if(scope){
                     string res = instructions.get_temp();
-                    instructions.add_instruction(LOAD_VARIABLE, Instruction::seriablize(variable_name, scope), NONE, res);
+                    int offset = variables.get_variable(scope, variable_name).offset;
+                    instructions.add_instruction(LOAD_VARIABLE, to_string(offset), NONE, res);
                     return res;
-                    
                 }
-                break;
             }
                 
             case __LEFT_Bracket__:{
@@ -330,14 +330,16 @@ public:
                 
                 
                 switch (desc_type) {
-                    case __Id__:
+                    case __Id__:{
                         // Desc - Id - t
                         variable_name = Desc.sons[0].sons[0].Component;
                         variables.add_variable(scopes.get_cur_scope(), variable_name, type);
-                        
-                        instructions.add_instruction(ASSIGN, "0", NONE, Instruction::seriablize(variable_name, scopes.get_cur_scope()));
+                        int offset = variables.get_variable(scopes.get_cur_scope(), variable_name).offset;
+                        instructions.add_instruction(ASSIGN, "0", NONE, to_string(offset) );
                         
                         break;
+                    }
+                        
                         
                     case __Asig_E__:
                         // Desc - Asig_E - Id - t

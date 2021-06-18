@@ -1,125 +1,91 @@
-PROGRAM-HEADER--H_Stmts-H_Stmt--Decl----Type----int     
-                                        Descs---Desc----Asig_E--Id------a       
-                                                                =       
-                                                                Expr----Factor--Decimal_Number11      
-                                                                        +       
-                                                                        Factor--Decimal_Number99      
-                                ;       
-                        H_Stmt--Decl----Type----int     
-                                        Descs---Desc----Asig_E--Id------i       
-                                                                =       
-                                                                Factor--Decimal_Number1111    
-                                ;       
+PROGRAM-HEADER--H_Stmts 
         MAIN----int     
                 main    
                 (       
                 )       
                 Block---{       
                         Stmts---Stmt----Decl----Type----int     
-                                                Descs---Desc----Id------x       
+                                                Descs---Desc----Id------num1    
                                                         ,       
-                                                        Desc----Id------y       
-                                        ;       
-                                Stmt----FunCall-FunName-get     
-                                                (       
-                                                Paras---Para----Factor--Id------x       
+                                                        Desc----Id------num2    
                                                         ,       
-                                                        Para----Factor--Id------y       
-                                                )       
+                                                        Desc----Id------num3    
+                                                        ,       
+                                                        Desc----Id------out     
+                                                        ,       
+                                                        Desc----Id------op      
                                         ;       
-                                Stmt----IF_BlockIF------if      
-                                                        (       
-                                                        Expr----Factor--Id------a       
-                                                                <=      
-                                                                Factor--Decimal_Number998     
-                                                        )       
-                                                        Block---{       
-                                                                Stmts---Stmt----Decl----Type----int     
-                                                                                        Descs---Desc----Asig_E--Id------b       
-                                                                                                                =       
-                                                                                                                Factor--Id------a       
-                                                                                ;       
-                                                                }       
-                                                IF_ELSE-else if 
-                                                        (       
-                                                        Expr----Factor--Id------a       
-                                                                ==      
-                                                                Factor--Decimal_Number10000   
-                                                        )       
-                                                        Block---{       
-                                                                Stmts---Stmt----Asig_E--Id------a       
-                                                                                        =       
-                                                                                        Expr----Factor--Id------a       
-                                                                                                -       
-                                                                                                Factor--Decimal_Number1       
-                                                                                ;       
-                                                                }       
-                                                IF_ELSE-else if 
-                                                        (       
-                                                        Expr----Factor--Id------a       
-                                                                ==      
-                                                                Factor--Decimal_Number10001   
-                                                        )       
-                                                        Block---{       
-                                                                Stmts---Stmt----Asig_E--Id------a       
-                                                                                        =       
-                                                                                        Expr----Factor--Id------a       
-                                                                                                -       
-                                                                                                Factor--Decimal_Number2       
-                                                                                ;       
-                                                                }       
-                                                ELSE----else    
-                                                        Block---{       
-                                                                Stmts---Stmt----Asig_E--Id------a       
-                                                                                        =       
-                                                                                        Expr----Factor--Id------a       
-                                                                                                +       
-                                                                                                Factor--Decimal_Number1       
-                                                                                ;       
-                                                                }       
-                                Stmt----IF_BlockIF------if      
-                                                        (       
-                                                        Expr----Factor--Id------a       
-                                                                ==      
-                                                                Factor--Decimal_Number100     
-                                                        )       
-                                                        Block---{       
-                                                                Stmts---Stmt----Asig_E--Id------a       
-                                                                                        =       
-                                                                                        Factor--Decimal_Number200     
-                                                                                ;       
-                                                                }       
-                                Stmt----Decl----Type----int     
-                                                Descs---Desc----Asig_E--Id------b       
-                                                                        =       
-                                                                        Factor--Decimal_Number12      
+                                Stmt----Asig_E--Id------num1    
+                                                =       
+                                                Factor--Decimal_Number3333    
+                                        ;       
+                                Stmt----Asig_E--Id------num2    
+                                                =       
+                                                Factor--Decimal_Number6666    
+                                        ;       
+                                Stmt----Asig_E--Id------num3    
+                                                =       
+                                                Factor--Decimal_Number9999    
+                                        ;       
+                                Stmt----Asig_E--Id------op      
+                                                =       
+                                                Factor--Decimal_Number1       
                                         ;       
                                 Stmt----WHILE---while   
                                                 (       
-                                                Expr----Factor--Id------b       
-                                                        <       
-                                                        Factor--Decimal_Number13      
+                                                Expr----Factor--Id------op      
+                                                        >       
+                                                        Factor--Decimal_Number0       
                                                 )       
                                                 Block---{       
-                                                        Stmts---Stmt----Asig_E--Id------b       
-                                                                                =       
-                                                                                Expr----Factor--Id------b       
-                                                                                        +       
-                                                                                        Factor--Decimal_Number1       
+                                                        Stmts---Stmt----IF_BlockIF------if      
+                                                                                        (       
+                                                                                        Expr----Factor--Id------op      
+                                                                                                ==      
+                                                                                                Factor--Decimal_Number1       
+                                                                                        )       
+                                                                                        Block---{       
+                                                                                                Stmts---Stmt----Asig_E--Id------out     
+                                                                                                                        =       
+                                                                                                                        Factor--Id------num1    
+                                                                                                                ;       
+                                                                                                }       
+                                                                Stmt----IF_BlockIF------if      
+                                                                                        (       
+                                                                                        Expr----Factor--Id------op      
+                                                                                                ==      
+                                                                                                Factor--Decimal_Number2       
+                                                                                        )       
+                                                                                        Block---{       
+                                                                                                Stmts---Stmt----Asig_E--Id------out     
+                                                                                                                        =       
+                                                                                                                        Factor--Id------num2    
+                                                                                                                ;       
+                                                                                                }       
+                                                                Stmt----IF_BlockIF------if      
+                                                                                        (       
+                                                                                        Expr----Factor--Id------op      
+                                                                                                ==      
+                                                                                                Factor--Decimal_Number3       
+                                                                                        )       
+                                                                                        Block---{       
+                                                                                                Stmts---Stmt----Asig_E--Id------out     
+                                                                                                                        =       
+                                                                                                                        Factor--Id------num3    
+                                                                                                                ;       
+                                                                                                }       
+                                                                Stmt----FunCall-FunName-put     
+                                                                                (       
+                                                                                Paras---Para----Factor--Id------out     
+                                                                                )       
+                                                                        ;       
+                                                                Stmt----FunCall-FunName-get     
+                                                                                (       
+                                                                                Paras---Para----Factor--Id------op      
+                                                                                )       
                                                                         ;       
                                                         }       
-                                Stmt----FunCall-FunName-put     
-                                                (       
-                                                Paras---Para----Expr----Expr----Factor--Id------x       
-                                                                                +       
-                                                                                Factor--Id------y       
-                                                                        +       
-                                                                        Factor--Id------b       
-                                                )       
-                                        ;       
                                 Stmt----RETURN--return  
-                                                Expr----Factor--Decimal_Number7       
-                                                        +       
-                                                        Factor--Id------i       
+                                                Factor--Decimal_Number0       
                                         ;       
                         }       

@@ -38,19 +38,9 @@ public:
     void add_instruction(int Op, string num1, string num2, string res){
         instructions.push_back(Instruction(Op, num1, num2, res));
     }
-    
-    
-    
-    void add_instruction(int Op, string num1, string num2, string res, int pos){
-        instructions.insert(instructions.begin()+pos ,Instruction(Op, num1, num2, res));
-    }
 
     void add_label(string label){
         instructions.back().res = label;
-    }
-    
-    int get_pos(){
-        return instructions.size();
     }
     
     void print_instructions(){

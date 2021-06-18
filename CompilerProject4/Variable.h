@@ -149,8 +149,6 @@ public:
         int size = variables[scope].size();
         Variable::cur_offset += 4 * size;
         
-//        variables.erase(scope);
-//        printf("Size : %d\n", variables.size());
     }
     
     Variable& get_variable(int scope, string variable_name){

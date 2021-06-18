@@ -1,39 +1,26 @@
-int a = 11+99;
-int i=1111;
-
 int main(){
-    
-    //int a = 9900-i*2/3;
-    int x,y;
-    get(x,y);
-    
-    // step into another scope
-    if(a <= 998){
-        int b = a;
+int num1,num2,num3,out,op;
+num1 = 3333;
+num2 = 6666;
+num3 = 9999;
+op = 1;
+while(op>0)
+{
+    if(op==1)
+    {
+         out = num1;
     }
-    else if(a==10000){
-        a = a - 1;
+    if(op==2)
+    {
+         out = num2;
     }
-    else if(a==10001){
-        a = a - 2;
+    if(op==3)
+    {
+         out = num3;
     }
-    else{
-         a = a + 1;
-    }
-    
-    
-    if(a==100){
-         a = 200;
-    }
-    
-    int b = 12;
-    
-    while(b<13){
-        b = b + 1;
-    }
-    put(x+y+b);
-    
-    return 7+i;
+    put(out);
+    get(op);
 }
+return 0;
 
-
+}
